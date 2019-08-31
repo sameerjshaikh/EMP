@@ -1,0 +1,177 @@
+#include<iostream>
+#include<string>
+using namespace std;
+//--------------header file
+void print(string msg)
+{
+	cout<<msg<<endl;
+}
+string getString(string question)
+{
+	print(question);
+	string answer;
+	cin>>answer;
+	return answer;
+}
+int getNumber(string question)
+{
+	print(question);
+	int answer;
+	cin>>answer;
+	return answer;
+}
+double long getValue(string question)
+{
+	print(question);
+	double long answer;
+	cin>>answer;
+	return answer;
+}
+
+///class file----------------------------
+class Employee
+{
+	private:
+		int ID;
+		string NAME;
+		string ADDR;
+		long CONT;
+	public:
+	void setdetails(int ID,string NAME,double long CONT,string ADDR)
+	{
+		this->ID=ID;
+		this->NAME=NAME;
+		this->CONT=CONT;
+		this->ADDR=ADDR;							
+      }
+      int getId()
+      {
+      	return ID;
+	}
+	string getName()
+      {
+      	return NAME;
+	}
+	string getAddr()
+      {
+      	return ADDR;
+	}
+	double getCont()
+      {
+      	return CONT;
+	}
+
+
+};
+
+
+//main file
+
+int SIZE;
+Employee* Allemployees;
+
+void 	EmployeeNewData(Employee emp)
+{
+	for(int i=0;i<SIZE;i++)
+	{
+		if(Allemployees[i].getName()=="")
+			Allemployees[i].setdetails(emp.getId(),emp.getName(),emp.getCont(),emp.getAddr());
+		return;
+	}throw "data not add not found";
+	
+	
+}
+void AddEmployee()
+{
+	Employee emp;
+	int id=getNumber("Enter Employee ID");
+	string name=getString("Enter Employee Name");
+	string addr=getString("Enter Employee Addr");
+	double long cont=getValue("Enter Employee Contact No.");
+	
+	emp.setdetails(id,name,cont,addr);
+	EmployeeNewData(emp);
+	print("Emp added");	
+}
+void DeleteEmp()
+{
+	int id=getNumber("Enter Emp Id For Delete ");
+	for(int i=0; i<SIZE;i++)
+	{
+   	if(Allemployees[i].getId()== id)
+	   {
+   		Allemployees[i].setdetails(0, "", 0,"");
+   		return;
+	   }
+	   
+     }
+     throw "id not found";
+
+}
+void Display(){
+	for(int i = 0; i < SIZE;i++){
+	 	if(Allemployees[i].getName()!= "")
+		   {
+		   	cout<<"\n"<<Allemployees[i].getId()<<"    ";
+		   	cout<<Allemployees[i].getName()<<"    ";
+		   	cout<<Allemployees[i].getCont()<<"    ";
+		   	cout<<Allemployees[i].getAddr()<<"    "<<endl;
+              }
+}
+}
+void menuOperation()
+{
+	SIZE=getNumber("Enteer Number Of Employee");
+	Allemployees =new Employee[SIZE];
+	int choice;
+	
+	do{
+	
+		
+		cout<<"\n-------Enter Choice-------";
+		cout<<"\n1.Add Employee-----";
+		cout<<"\n2.Update Employee---";
+		cout<<"\n3.Delete Employee-----";
+		cout<<"\n4.Display Employee-----";
+		cout<<"\n5.Exit-----";
+		
+		cin>>choice;
+		switch(choice)
+		{	
+			case 1:
+				AddEmployee();
+				break;
+			
+			case 2:
+				//update();
+				break;
+			
+			case 3:
+				DeleteEmp();
+				print("id deleted ");
+				break;
+			
+			case 4:
+				Display();
+				break;
+			
+			case 5:
+			        
+				break;
+			
+			default:
+			         cout<<"Enter valid choice";   			
+		}			
+									
+																							
+}while(choice!=5);
+	
+}
+int main()
+{
+	
+	menuOperation();
+	return 0;	
+}
+
+
